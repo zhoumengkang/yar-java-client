@@ -17,14 +17,22 @@ public class YarClientTest extends TestCase {
     /**
      * rpc api 地址
      */
-    static String RewardScoreServiceUri = "http://mengkang.net/demo/yar-server/RewardScoreService.php";
+    static String uri = "http://mengkang.net/demo/yar-server/RewardScoreService.php";
 
     public void testUserService(){
-        YarClient yarClient  = new YarClient(RewardScoreServiceUri);
+        // 第一种调用方式
+        YarClient yarClient  = new YarClient(uri);
         RewardScoreService rewardScoreService = (RewardScoreService) yarClient.useService(RewardScoreService.class);
         for (int i = 0; i < 10; i++) {
             System.out.println(rewardScoreService.support(1, 2));
-            System.out.println(rewardScoreService.post(1, 20));
+        }
+        // 第二种调用方式
+        YarClientOptions yarClientOptions = new YarClientOptions();
+        yarClientOptions.setConnect_timeout(2000);
+        YarClient yarClient2  = new YarClient(uri,yarClientOptions);
+        RewardScoreService rewardScoreService2 = (RewardScoreService) yarClient2.useService(RewardScoreService.class);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(rewardScoreService2.post(1, 20));
         }
     }
 

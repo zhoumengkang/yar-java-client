@@ -12,7 +12,7 @@ public class YarConcurrentClientTest extends TestCase {
     /**
      * rpc api 地址
      */
-    static String RewardScoreServiceUri = "http://mengkang.net/demo/yar-server/RewardScoreService.php";
+    static String uri = "http://mengkang.net/demo/yar-server/RewardScoreService.php";
 
     public class callback extends YarConcurrentCallback {
 
@@ -40,14 +40,17 @@ public class YarConcurrentClientTest extends TestCase {
         yarClientOptions.setConnect_timeout(2000);
 
         for (int i = 0; i < 10; i++) {
-            YarConcurrentClient.call(new YarConcurrentTask(RewardScoreServiceUri, "support", new Object[]{1, 2}, packagerName, new callback()));
-
-            YarConcurrentClient.call(new YarConcurrentTask(RewardScoreServiceUri, "support", new Object[]{1, 2}, packagerName, new callback(),yarClientOptions));
+            // 第一种调用方式
+            YarConcurrentClient.call(new YarConcurrentTask(uri, "support", new Object[]{1, 2}, packagerName, new callback()));
+            // 第二种调用方式 增加一些额外配置选项
+            YarConcurrentClient.call(new YarConcurrentTask(uri, "support", new Object[]{1, 2}, packagerName, new callback(),yarClientOptions));
         }
 
         for (int i = 0; i < 10; i++) {
-            YarConcurrentClient.call(new YarConcurrentTask(RewardScoreServiceUri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback()));
-            YarConcurrentClient.call(new YarConcurrentTask(RewardScoreServiceUri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback(),yarClientOptions));
+            // 第三种调用方式 有正确的回调和错误的回调
+            YarConcurrentClient.call(new YarConcurrentTask(uri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback()));
+            // 第四种调用方式 在第三种的基础上增加额外的配置选项
+            YarConcurrentClient.call(new YarConcurrentTask(uri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback(),yarClientOptions));
         }
 
         YarConcurrentClient.loop(new callback());
