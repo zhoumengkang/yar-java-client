@@ -7,6 +7,14 @@ Yar 鸟哥原始项目 https://github.com/laruence/yar
 
 Yar Java Client 则实现了跨语言的远程调用。使得 Java 客户端能够调用 Yar PHP 服务器端本地的方法。
 
+# 特性
+
+1. 执行速度快，依旧保持鸟哥初衷，框架轻，使用简单
+
+2. 支持并行的 RPC 调用
+
+3. 方法的使用和参数的和 PHP 版本保持一致
+
 # 范例
 
 PHP服务器端
