@@ -17,8 +17,11 @@ Yar Java Client 则实现了跨语言的远程调用。使得 Java 客户端能�
 
 # 范例
 
+> 更详细的使用说明请参考 [wiki](https://github.com/zhoumengkang/yar-java-client/wiki/Manual)
+
 PHP服务器端
 ---
+
 提供了两个 rpc api ，模拟的业务场景是点赞赠送金币和发布帖子赠送金币。
 
 ```php
@@ -52,6 +55,7 @@ $yar_server->handle();
 
 Java客户端同步调用这两个服务
 ---
+
 ```java
 public class YarClientTest extends TestCase {
     /**
@@ -88,7 +92,7 @@ public class YarClientTest extends TestCase {
 Java客户端并行调用这两个服务
 ---
 
-这里的方法的命令皆以 Yar 原版为准则。
+并发调用的 api 均按照 php c 扩展版本的 yar 协议为准 原版 api http://php.net/manual/zh/class.yar-concurrent-client.php
 
 `YarConcurrentClient.call`方法注册，
 
@@ -97,6 +101,7 @@ Java客户端并行调用这两个服务
 `YarConcurrentClient.reset`清空任务。
 
 回调函数需要继承实现`YarConcurrentCallback`里面定义了两个方法：`async`是针对并行调用发出之后立即执行的任务，而`success`则是每个请求之后返回的结果。
+
 ```java
 public class YarConcurrentClientTest extends TestCase {
 
