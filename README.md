@@ -49,6 +49,7 @@ class RewardScoreService {
 $yar_server = new Yar_server(new RewardScoreService());
 $yar_server->handle();
 ```
+
 Java客户端同步调用这两个服务
 ---
 ```java
@@ -70,21 +71,20 @@ public class YarClientTest extends TestCase {
         // 第一种调用方式
         YarClient yarClient  = new YarClient(uri);
         RewardScoreService rewardScoreService = (RewardScoreService) yarClient.useService(RewardScoreService.class);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(rewardScoreService.support(1, 2));
-        }
+        System.out.println(rewardScoreService.support(1, 2));
+        
         // 第二种调用方式
         YarClientOptions yarClientOptions = new YarClientOptions();
         yarClientOptions.setConnect_timeout(2000);
+        
         YarClient yarClient2  = new YarClient(uri,yarClientOptions);
         RewardScoreService rewardScoreService2 = (RewardScoreService) yarClient2.useService(RewardScoreService.class);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(rewardScoreService2.post(1, 20));
-        }
+        System.out.println(rewardScoreService2.post(1, 20));
     }
 
 }
 ```
+
 Java客户端并行调用这两个服务
 ---
 
@@ -130,22 +130,22 @@ public class YarConcurrentClientTest extends TestCase {
         YarClientOptions yarClientOptions = new YarClientOptions();
         yarClientOptions.setConnect_timeout(2000);
 
-        for (int i = 0; i < 10; i++) {
-            // 第一种调用方式
-            YarConcurrentClient.call(new YarConcurrentTask(uri, "support", new Object[]{1, 2}, packagerName, new callback()));
-            // 第二种调用方式 增加一些额外配置选项
-            YarConcurrentClient.call(new YarConcurrentTask(uri, "support", new Object[]{1, 2}, packagerName, new callback(),yarClientOptions));
-        }
+        // 第一种调用方式
+        YarConcurrentClient.call(new YarConcurrentTask(uri, "support", new Object[]{1, 2}, packagerName, new callback()));
+        
+        // 第二种调用方式 增加一些额外配置选项
+        YarConcurrentClient.call(new YarConcurrentTask(uri, "support", new Object[]{1, 2}, packagerName, new callback(),yarClientOptions));
 
-        for (int i = 0; i < 10; i++) {
-            // 第三种调用方式 有正确的回调和错误的回调
-            YarConcurrentClient.call(new YarConcurrentTask(uri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback()));
-            // 第四种调用方式 在第三种的基础上增加额外的配置选项
-            YarConcurrentClient.call(new YarConcurrentTask(uri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback(),yarClientOptions));
-        }
+        // 第三种调用方式 有正确的回调和错误的回调
+        YarConcurrentClient.call(new YarConcurrentTask(uri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback()));
+        
+        // 第四种调用方式 在第三种的基础上增加额外的配置选项
+        YarConcurrentClient.call(new YarConcurrentTask(uri,"post",new Object[]{1,2},packagerName,new callback(),new errorCallback(),yarClientOptions));
 
         YarConcurrentClient.loop(new callback());
         YarConcurrentClient.reset();
     }
 }
 ```
+# 详细说明
+请查看 [wiki](./wik
