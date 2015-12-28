@@ -148,4 +148,5 @@ public class YarConcurrentClientTest extends TestCase {
 }
 ```
 # 详细说明
-请查看 [wiki](./wik)
+更多详细的说明，请查看 [wiki](https://github.com/zhoumengkang/yar-java-client/wiki)
+有任何使用的问题和技术交流，欢迎使用 [issues](https://github.com/zhoumengkang/yar-java-client/issues)
