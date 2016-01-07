@@ -1,4 +1,7 @@
 # 简介
+
+[![Build Status](https://travis-ci.org/zhoumengkang/yar-java-client.svg)](https://travis-ci.org/zhoumengkang/yar-java-client)
+
 Yar 是一个轻量级, 高效的 RPC 框架, 它提供了一种简单方法来让 PHP 项目之间可以互相远程调用对方的本地方法. 并且 Yar 也提供了并行调用的能力. 可以支持同时调用多个远程服务的方法.
 
 Yar 鸟哥博客介绍 http://www.laruence.com/2012/09/15/2779.html

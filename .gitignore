@@ -6,4 +6,5 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 /.idea
+/yar-java-client.iml
 buildNumber.properties
